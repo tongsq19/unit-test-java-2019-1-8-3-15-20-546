@@ -1,5 +1,7 @@
 package tw.validator;
 
+import tw.core.exception.OutOfRangeAnswerException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +20,14 @@ public class InputValidator {
     }
 
     private boolean validateSingleGigit(List<String> numList, int numCount) {
-        return numList.stream()
-                .map(num -> parseInt(num))
-                .distinct()
-                .filter(num -> num < 10).count() == numCount;
+        try {
+            return numList.stream()
+                    .map(num -> parseInt(num))
+                    .distinct()
+                    .filter(num -> num < 10).count() == numCount;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     private Boolean validateDigitsCount(List<String> numList, int numCount) {
