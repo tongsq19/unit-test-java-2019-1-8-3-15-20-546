@@ -9,7 +9,13 @@ import java.util.Set;
  */
 public class RandomIntGenerator {
 
+    private Random rng;
     public RandomIntGenerator() {
+        rng = new Random();
+    }
+
+    public void setRandom(Random random) {
+        rng = random;
     }
 
     public String generateNums(Integer digitmax, Integer numbersOfNeed) {
@@ -18,7 +24,6 @@ public class RandomIntGenerator {
             throw new IllegalArgumentException("Can't ask for more numbers than are available");
         }
 
-        Random rng = new Random();
         Set<String> generated = new LinkedHashSet<>();
         while (generated.size() < numbersOfNeed) {
             Integer next = rng.nextInt(digitmax);
